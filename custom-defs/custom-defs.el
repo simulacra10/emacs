@@ -8,11 +8,11 @@
 
 (defun org-journal ()
   (interactive)
-  (find-file "~/MEGA/journal/journal.txt.gpg")
+  (find-file "~/MEGAsync/journal/journal.txt.gpg")
 )
 
 (defun org-gtd ()
   (interactive)
-  (find-file "~/MEGA/journal/gtd.txt.gpg")
+  (find-file "~/MEGAsync/journal/gtd.txt.gpg")
 )
 

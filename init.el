@@ -22,3 +22,6 @@
 ;; Get rid of the annoying splash screen
 
 (setq inhibit-startup-screen t)
+
+;;My custom definitions file - stored in directory /elisp/
+(load-file "~/elisp/custom-defs.el")

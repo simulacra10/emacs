@@ -24,4 +24,4 @@
 (setq inhibit-startup-screen t)
 
 ;;My custom definitions file - stored in directory /elisp/
-(load-file "~/elisp/custom-defs.el")
+(load-file "~/custom-defs/custom-defs.el")

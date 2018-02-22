@@ -3,7 +3,7 @@
 ;; 2018-02-21 - removed contacts as that is no longer used 
 (defun dotemacs ()
   (interactive)
-  (find-file "~/.emacs/init.el")
+  (find-file "~/.emacs.d/init.el")
 )
 
 (defun org-journal ()

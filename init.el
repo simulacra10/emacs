@@ -43,10 +43,10 @@
  ;; If there is more than one, they won't work right.
  )
 (load-theme 'monokai t)
-;; Kill the menu bar, scroll bar and the toolbar
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(toggle-scroll-bar -1)
+;; Kill the menu bar, scroll bar and the toolbar if using GUI version.
+;;(menu-bar-mode -1)
+;(tool-bar-mode -1)
+;;(toggle-scroll-bar -1)
 ;; Gotta have visual line mode on globally
 (global-visual-line-mode t)
 

@@ -33,9 +33,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   (quote
-    ("e9df267a1c808451735f2958730a30892d9a2ad6879fb2ae0b939a29ebf31b63" default)))
- '(package-selected-packages (quote (markdown-mode))))
+   '("e9df267a1c808451735f2958730a30892d9a2ad6879fb2ae0b939a29ebf31b63" default))
+ '(package-selected-packages '(ox-reveal org-tree-slide markdown-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -56,6 +55,12 @@
              '("melpa-stable" . "https://stable.melpa.org/packages/"))
 (package-initialize)
 
+;; package-selected-packages only records intent; it doesn't install
+;; anything. Fetch markdown-mode if it isn't actually present yet.
+(unless (package-installed-p 'markdown-mode)
+  (package-refresh-contents)
+  (package-install 'markdown-mode))
+
 (autoload 'markdown-mode "markdown-mode"
    "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
@@ -64,3 +69,10 @@
 (autoload 'gfm-mode "markdown-mode"
    "Major mode for editing GitHub Flavored Markdown files" t)
 (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
+
+(require 'org-tree-slide)
+
+(global-set-key (kbd "<f8>") #'org-tree-slide-mode)
+
+
+(require 'ox-reveal )

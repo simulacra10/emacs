@@ -74,12 +74,17 @@
    "Major mode for editing GitHub Flavored Markdown files" t)
 (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
 
+(unless (package-installed-p 'org-tree-slide)
+  (package-refresh-contents)
+  (package-install 'org-tree-slide))
 (require 'org-tree-slide)
 
 (global-set-key (kbd "<f8>") #'org-tree-slide-mode)
 
-
-(require 'ox-reveal )
+(unless (package-installed-p 'ox-reveal)
+  (package-refresh-contents)
+  (package-install 'ox-reveal))
+(require 'ox-reveal)
 
 ;;[spelling and grammar - org-mode and markdown]
 ;; Spelling: flyspell, backed by aspell (installed via NixOS

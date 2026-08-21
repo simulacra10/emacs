@@ -34,7 +34,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    '("e9df267a1c808451735f2958730a30892d9a2ad6879fb2ae0b939a29ebf31b63" default))
- '(package-selected-packages '(ox-reveal org-tree-slide markdown-mode flymake-languagetool)))
+ '(package-selected-packages '(ox-reveal org-tree-slide markdown-mode flymake-languagetool xclip)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -110,3 +110,15 @@
 ;; Flymake's default navigation is M-n / M-p (next/previous
 ;; diagnostic) once flymake-mode is on; see the diagnostic under
 ;; point with M-x flymake-show-buffer-diagnostics.
+
+;;[system clipboard - terminal emacs <-> GNOME]
+;; emacs-nox has no window-system connection, so it can't reach the
+;; GNOME (Wayland) clipboard on its own. xclip.el shells out to
+;; wl-copy/wl-paste (installed via NixOS packages.nix) to bridge the
+;; kill-ring: M-w/C-w/C-k copy to the system clipboard, C-y pastes
+;; from it, same as any GUI app.
+(unless (package-installed-p 'xclip)
+  (package-refresh-contents)
+  (package-install 'xclip))
+
+(xclip-mode 1)

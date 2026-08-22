@@ -95,6 +95,15 @@
 (dolist (hook '(org-mode-hook markdown-mode-hook gfm-mode-hook))
   (add-hook hook #'flyspell-mode))
 
+;; helm-flyspell: pick a correction from a helm buffer instead of the
+;; flyspell popup menu.
+(unless (package-installed-p 'helm-flyspell)
+  (package-refresh-contents)
+  (package-install 'helm-flyspell))
+
+(with-eval-after-load 'flyspell
+  (define-key flyspell-mode-map (kbd "C-;") 'helm-flyspell-correct))
+
 ;; Grammar: flymake-languagetool, talking to a local LanguageTool
 ;; HTTP server (also from NixOS packages.nix). The server is started
 ;; on demand the first time flymake-languagetool-load runs in a

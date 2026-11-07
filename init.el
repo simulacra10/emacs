@@ -34,7 +34,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    '("e9df267a1c808451735f2958730a30892d9a2ad6879fb2ae0b939a29ebf31b63" default))
- '(package-selected-packages '(ox-reveal org-tree-slide markdown-mode flymake-languagetool xclip)))
+ '(package-selected-packages '(ox-reveal org-tree-slide markdown-mode xclip)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -53,8 +53,7 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/"))
-;; melpa-stable doesn't tag every package (flymake-languagetool among
-;; them), so keep regular melpa as a lower-priority fallback.
+;; melpa-stable doesn't tag every package, so keep regular melpa as a lower-priority fallback.
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
@@ -86,7 +85,7 @@
   (package-install 'ox-reveal))
 (require 'ox-reveal)
 
-;;[spelling and grammar - org-mode and markdown]
+;;[spelling - org-mode and markdown]
 ;; Spelling: flyspell, backed by aspell (installed via NixOS
 ;; packages.nix, not by Emacs). Underlines misspelled words as you
 ;; type; right-click (or C-c $ / M-$ at point) for corrections.
@@ -103,27 +102,6 @@
 
 (with-eval-after-load 'flyspell
   (define-key flyspell-mode-map (kbd "C-;") 'helm-flyspell-correct))
-
-;; Grammar: flymake-languagetool, talking to a local LanguageTool
-;; HTTP server (also from NixOS packages.nix). The server is started
-;; on demand the first time flymake-languagetool-load runs in a
-;; buffer - no separate step needed, but the first check in a
-;; session takes a few seconds while the server boots.
-(unless (package-installed-p 'flymake-languagetool)
-  (package-refresh-contents)
-  (package-install 'flymake-languagetool))
-
-(require 'flymake-languagetool)
-(setq flymake-languagetool-server-command '("languagetool-server")
-      flymake-languagetool-server-args '("--port" "8081"))
-
-(dolist (hook '(org-mode-hook markdown-mode-hook gfm-mode-hook))
-  (add-hook hook #'flymake-mode)
-  (add-hook hook #'flymake-languagetool-load))
-
-;; Flymake's default navigation is M-n / M-p (next/previous
-;; diagnostic) once flymake-mode is on; see the diagnostic under
-;; point with M-x flymake-show-buffer-diagnostics.
 
 ;;[system clipboard - terminal emacs <-> GNOME]
 ;; emacs-nox has no window-system connection, so it can't reach the
